@@ -13,8 +13,8 @@ public class Camiao {
     
        private String Matricula;
     private float tanque;
-    private String seguros;
-    private float peso_bruto;
+    private String seguros,Marca;
+    private int peso_bruto;
     private int num_viagens;
     private int num_Manutencao;
 
@@ -45,11 +45,11 @@ public class Camiao {
         this.seguros = seguros;
     }
 
-    public float getPeso_bruto() {
+    public int getPeso_bruto() {
         return peso_bruto;
     }
 
-    public void setPeso_bruto(float peso_bruto) {
+    public void setPeso_bruto(int peso_bruto) {
         this.peso_bruto = peso_bruto;
     }
 
@@ -68,6 +68,17 @@ public class Camiao {
     public void setNum_Manutencao(int num_Manutencao) {
         this.num_Manutencao = num_Manutencao;
     }
+
+    public String getMarca() {
+        return Marca;
+    }
+
+    public void setMarca(String Marca) {
+        this.Marca = Marca;
+    }
+
+ 
+  
     
     
     

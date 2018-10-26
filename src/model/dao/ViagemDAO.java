@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.entidade.Viagem;
+import model.entidade.Viagens;
 
 /**
  *
@@ -61,15 +62,17 @@ public class ViagemDAO implements DAOinterface<Viagem,Integer> {
         {
         
         stmt=con.prepareStatement("UPDATE viagem set ponto_partida=?,distancia=?,data_partida=?"
-                + ",pocket_money=?,provincia=?,distrito=?,ciadade=? where codviagem=? ");
+                + ",pocket_money=?,provincia=?,distrito=?,cidade=? where codviagem=? ");
             
         stmt.setString(1,v.getPonto_partida());
         stmt.setFloat(2,v.getDistancia());
         stmt.setDate(3,new Date(v.getData_partida().getTime()));
-        stmt.setFloat(3,v.getPocket_money());
-        stmt.setString(4,v.getProvincia());
-        stmt.setString(5,v.getDistrito());
-        stmt.setString(5,v.getCidade());
+        stmt.setFloat(4,v.getPocket_money());
+        stmt.setString(5,v.getProvincia());
+        stmt.setString(6,v.getDistrito());
+        stmt.setString(7,v.getCidade());
+        stmt.setInt(8,v.getCod_viagem());
+        
         stmt.executeUpdate();
             
         JOptionPane.showMessageDialog(null,"Actualizado com sucesso");
@@ -96,6 +99,54 @@ public class ViagemDAO implements DAOinterface<Viagem,Integer> {
         Logger.getLogger(ViagemDAO.class.getName()).log(Level.SEVERE,null,ex);
         }  
     }
+    public List<Viagens> listarTudo() {
+        String sql="SELECT * from dadosviagem";
+        ResultSet rs=null;
+        PreparedStatement stmt=null;
+        List<Viagens>v=new ArrayList<>();
+        
+        try{
+            stmt=con.prepareStatement(sql);
+            rs=stmt.executeQuery();
+            while(rs.next())
+            {//Os nomes devem ser iGuais com a Base De dados
+             
+                      Viagens viagem;
+                viagem = new Viagens();
+                                    
+	     viagem.setIdCliente(rs.getInt("idCliente"));
+             viagem.setCodigo(rs.getInt("codViagem"));
+             viagem.setPonto_partida(rs.getString("ponto_partida"));
+             viagem.setDistancia(rs.getInt("distancia"));
+             viagem.setData_partida(rs.getDate("data_partida"));
+             viagem.setPocket_money(rs.getFloat("pocket_money"));
+             viagem.setProvincia(rs.getString("provincia"));
+             viagem.setDistrito(rs.getString("distrito"));
+             viagem.setCidade(rs.getString("cidade"));
+            
+             
+			 viagem.setIdcarga(rs.getInt("idCarga"));
+			 viagem.setTipo(rs.getString("tipo"));
+			 viagem.setValor(rs.getFloat("valor"));
+			 viagem.setCusto(rs.getFloat("custo_viagem"));
+			 viagem.setIdfun(rs.getInt("idFun"));
+			 viagem.setMatricula(rs.getString("matricula"));
+                         viagem.setNumero(rs.getInt("numero"));
+			 viagem.setData_multa(rs.getDate("data_multa"));
+			 
+			 
+              v.add(viagem);
+            
+            }
+              stmt.close();
+             rs.close();
+        }catch(SQLException ex){
+           Logger.getLogger(ViagemDAO.class.getName()).log(Level.SEVERE,null,ex);
+          }
+      return v; 
+    }
+
+   
 
     @Override
     public List<Viagem> listar() {
@@ -137,14 +188,13 @@ public class ViagemDAO implements DAOinterface<Viagem,Integer> {
         ResultSet rs=null;
         PreparedStatement stmt=null;
         List<Viagem>viagens=new ArrayList<>();
-        
+         Viagem viagem=new Viagem();
         try{
             stmt=con.prepareStatement(sql);
             stmt.setInt(1,i);
             rs=stmt.executeQuery();
             while(rs.next())
             {
-             Viagem viagem=new Viagem();
              viagem.setCod_viagem(rs.getInt("codViagem"));//Os nomes devem ser iGuais com a Base De dados
              viagem.setPonto_partida(rs.getString("ponto_partida"));
              viagem.setDistancia(rs.getInt("distancia"));
@@ -154,12 +204,12 @@ public class ViagemDAO implements DAOinterface<Viagem,Integer> {
              viagem.setDistrito(rs.getString("distrito"));
              viagem.setCidade(rs.getString("cidade"));
             
-             return viagem; 
+     
             }   
              stmt.close();
              rs.close();
            }catch(SQLException ex){
            Logger.getLogger(ViagemDAO.class.getName()).log(Level.SEVERE,null,ex); }
-        return null;
+           return viagem;
     }
 }

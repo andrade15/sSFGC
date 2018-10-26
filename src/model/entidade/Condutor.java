@@ -5,28 +5,22 @@
  */
 package model.entidade;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 /**
  *
  * @author OSVALDO
  */
 public class Condutor {
-    private Date dataNac;
+   
     private int idFun;
-    private String Categoria;
+    private int Ano_Experiencia;
+    private Date data_nasc;
     private int num_viagens;
-    private int idGestor;
+  
 
     public Condutor() {
-    }
-
-    public Date getDataNac() {
-        return dataNac;
-    }
-
-    public void setDataNac(Date dataNac) {
-        this.dataNac = dataNac;
     }
 
     public int getIdFun() {
@@ -37,12 +31,20 @@ public class Condutor {
         this.idFun = idFun;
     }
 
-    public String getCategoria() {
-        return Categoria;
+    public int getAno_Experiencia() {
+        return Ano_Experiencia;
     }
 
-    public void setCategoria(String Categoria) {
-        this.Categoria = Categoria;
+    public void setAno_Experiencia(int Ano_Experiencia) {
+        this.Ano_Experiencia = Ano_Experiencia;
+    }
+
+    public Date getData_nasc() {
+        return data_nasc;
+    }
+
+    public void setData_nasc(Date data_nasc) {
+        this.data_nasc = data_nasc;
     }
 
     public int getNum_viagens() {
@@ -53,15 +55,6 @@ public class Condutor {
         this.num_viagens = num_viagens;
     }
 
-    public int getIdGestor() {
-        return idGestor;
-    }
-
-    public void setIdGestor(int idGestor) {
-        this.idGestor = idGestor;
-    }
-    
-    
     
  
     

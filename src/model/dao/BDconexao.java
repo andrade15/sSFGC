@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,10 +31,13 @@ public class BDconexao {
         return DriverManager.getConnection(URL, user, password);
         
          } catch (ClassNotFoundException | SQLException ex) {
-            throw new RuntimeException("Erro na conexão: ", ex);
-        }
+          JOptionPane.showMessageDialog(null,"Erro na Conexao");
+          System.exit(0);
+         }
+    return null;
+     }
      
-    }
+    
         //Para fechar conexao
     public static void fecharConexao(Connection con)
     {

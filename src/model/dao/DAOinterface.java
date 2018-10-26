@@ -16,14 +16,14 @@ public interface DAOinterface<V,I> {
     
     public V inserir(V v);
     
-    public void Update(V v);
+    public void Update( V v);
     
     public void delete(I i);
     
   
     public List<V> listar();
     
-    public V listarPorID(I i);
+    public List listarPorID(I i);
     
     
     
